@@ -1,0 +1,404 @@
+@import "reset";
+
+body {
+    font-family: 'Poppins', Arial;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    align-items: center;
+
+    & h1 {
+        font-size: 2.8vw;
+        text-align: center;
+        margin-top: 1vw;
+    }
+
+    & .scoreboard {
+        width: 30vw;
+        display: flex;
+        justify-content: center;
+        font-size: 1.5vw;
+        margin-top: 2vw;
+        margin-bottom: 1vw;
+        padding: 1vw;
+        background: #ededed;
+        border-radius: 100px;
+        border: solid 1px #d7d7d7;
+
+        &__moves,
+        &__timer {
+            text-align: center;
+            width: 50%;
+        }
+    }
+
+    & .game {
+        display: flex;
+        flex-flow: wrap;
+        width: 88vw;
+
+        &__card {
+            width: 10vw;
+            height: 10vw;
+            border-radius: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4vw;
+            margin: 0.5vw;
+            cursor: pointer;
+            position: relative;
+            transition: 0.6s;
+            box-shadow: 0px 3px 10px rgba(44, 49, 0, 0);
+            transform-style: preserve-3d;
+            transform: rotateY(180deg);
+
+            &:active {
+                transform: scale(0.8) rotateY(180deg);
+            }
+
+            &--flip {
+                transform: rotateY(0deg);
+
+                & .front,
+                & .back {
+                    background: blue !important;
+                    color: #fff;
+                }
+
+                &.match {
+                    animation: matched .6s ease-out;
+
+                    & .front,
+                    & .back {
+                        background: green !important;
+                    }
+
+                    &:active {
+                        transform: scale(1) rotateY(0deg) !important;
+                    }
+
+                    &:hover {
+                        box-shadow: 0px 8px 15px rgba(44, 49, 0, 0) !important;
+                    }
+                }
+            }
+
+            & .front {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 0;
+                background: yellow;
+                width: 100%;
+                height: 100%;
+                border-radius: 15%;
+                pointer-events: none;
+            }
+
+            & .back {
+                position: absolute;
+                z-index: 1;
+                background: yellow;
+                width: 100%;
+                height: 100%;
+                border-radius: 15%;
+                transform: rotateY(180deg);
+                pointer-events: none;
+            }
+        }
+    }
+
+    & .btn {
+        margin-bottom: 2vw;
+    }
+}
+
+.popup {
+    position: fixed;
+    z-index: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    background: #000000ba;
+    width: 100vw;
+    height: 100vh;
+
+    & .wrap {
+        position: relative;
+        z-index: 999;
+        box-shadow: 0px 18px 45px rgba(0, 0, 0, 0.27);
+        background: #fff;
+        border-radius: 15px;
+        padding: 4vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+        transform: scale(0.5);
+        opacity: 0;
+        transition: .6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+
+        &.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        & p {
+            font-size: 2vw;
+            text-align: center;
+        }
+
+        & svg {
+            fill: blue;
+            width: 10vw;
+            height: 10.5vw;
+            margin-bottom: 2vw;
+        }
+
+        & .wrap-btns {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-flow: row;
+            width: 100%;
+        }
+    }
+
+
+}
+
+.btn {
+    margin-top: 2vw;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    background: blue;
+    color: #fff;
+    font-size: 1.5vw;
+    cursor: pointer;
+    border-radius: 100px;
+    transition: .4s;
+}
+
+.btn-sub {
+    margin-top: 2vw;
+    padding-top: calc(1vw - 2px);
+    padding-bottom: calc(1vw - 2px);
+    padding-left: calc(2vw - 2px);
+    padding-right: calc(2vw - 2px);
+    background: white;
+    color: blue;
+    font-size: 1.5vw;
+    cursor: pointer;
+    border-radius: 100px;
+    transition: 0.4s;
+    border: solid 2px blue;
+}
+
+@keyframes matched {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes poupup {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+@media only screen and (max-width: 1025px) {
+    .container {
+        & h1 {
+            font-size: 3.2vw;
+            margin-top: 3vw;
+        }
+
+        & .scoreboard {
+            width: 34vw;
+            font-size: 2vw;
+            margin-top: 3vw;
+            margin-bottom: 2vw;
+            padding: 1vw;
+        }
+
+        & .game {
+            width: 88vw;
+
+            &__card {
+                width: 10vw;
+                height: 10vw;
+                font-size: 4vw;
+                margin: 0.5vw;
+            }
+        }
+    }
+
+    .popup {
+        & .wrap {
+            padding: 4vw;
+
+            & p {
+                font-size: 2vw;
+            }
+
+            & svg {
+                width: 10vw;
+                height: 10.5vw;
+                margin-bottom: 2vw;
+            }
+
+            & .wrap-btns {
+                & .btn {
+                    margin-right: 20px;
+                }
+            }
+        }
+
+
+    }
+
+    .btn {
+        margin-top: 2vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+        font-size: 2vw;
+
+        &:active {
+            transform: scale(0.8);
+        }
+    }
+
+    .btn-sub {
+        margin-top: 2vw;
+        padding-top: calc(1vw - 2px);
+        padding-bottom: calc(1vw - 2px);
+        padding-left: calc(2vw - 2px);
+        padding-right: calc(2vw - 2px);
+        font-size: 2vw;
+
+        &:active {
+            transform: scale(0.8);
+        }
+    }
+
+}
+
+@media only screen and (max-width: 560px) {
+    .container {
+        & h1 {
+            font-size: 7.2vw;
+            margin-top: 4vw;
+        }
+
+        & .scoreboard {
+            width: 85vw;
+            font-size: 4.5vw;
+            margin-top: 4vw;
+            margin-bottom: 4vw;
+            padding: 1.5vw;
+        }
+
+        & .game {
+            width: 88vw;
+
+            &__card {
+                width: 20vw;
+                height: 20vw;
+                font-size: 12vw;
+                margin: 1vw;
+            }
+        }
+    }
+
+    .popup {
+        & .wrap {
+            padding: 4vw;
+
+            & p {
+                font-size: 7vw;
+            }
+
+            & svg {
+                width: 25vw;
+                height: 25vw;
+                margin-bottom: 3vw;
+                margin-top: 3vw;
+            }
+
+            & .wrap-btns {
+                & .btn {
+                    margin-right: 20px;
+                }
+            }
+        }
+
+
+    }
+
+    .btn {
+        margin-top: 4vw;
+        padding-top: 3vw;
+        padding-bottom: 3vw;
+        padding-left: 6vw;
+        padding-right: 6vw;
+        font-size: 5vw;
+        text-align: center;
+
+        &:active {
+            transform: scale(0.8);
+        }
+    }
+
+    .btn-sub {
+        margin-top: 4vw;
+        padding-top: calc(3vw - 2px);
+        padding-bottom: calc(3vw - 2px);
+        padding-left: calc(6vw - 2px);
+        padding-right: calc(6vw - 2px);
+        font-size: 5vw;
+        text-align: center;
+    }
+
+}
+
+@media(hover: hover) and (pointer: fine) {
+    .btn:hover {
+        transform: scale(1.05);
+        background: #4040ff;
+        box-shadow: 0px 8px 15px rgba(44, 49, 0, 0.25);
+    }
+
+    .btn-sub:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 8px 15px rgba(44, 49, 0, 0.25);
+    }
+
+    .game__card:hover {
+        box-shadow: 0px 8px 15px rgba(44, 49, 0, 0.25);
+    }
+}
